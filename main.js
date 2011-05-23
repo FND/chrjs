@@ -8,6 +8,7 @@
 
 // create a new class or subclass
 // optional `Base` argument specifies base class
+// optional `properties` argument specifies prototype attributes and methods
 var newClass = function(Base, init, properties) {
 	var constructor = function(args) {
 		this._base = Base;
@@ -15,7 +16,7 @@ var newClass = function(Base, init, properties) {
 			init.apply(this, arguments);
 		}
 	};
-	if(properties) { // subclass
+	if($.isFunction(init)) { // subclass
 		constructor.prototype = new Base();
 		constructor.prototype._base = Base;
 	} else { // discard Base argument
